@@ -1,0 +1,1844 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/11/2022 4:22:05 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LAPTOP-B183G8T7"
+  DTS:CreatorName="LAPTOP-B183G8T7\Thilini"
+  DTS:DTSID="{4D1759D5-8BCE-48F4-9FA0-EBBBA1BA4B10}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.180"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="accumilative_factTable"
+  DTS:PackageType="5"
+  DTS:VersionBuild="4"
+  DTS:VersionGUID="{80DDEC93-14FB-473D-B36F-02614A6F324A}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Flat File Connection Manager]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{7023CAD2-57F6-47BC-8DF0-9BF966747799}"
+      DTS:ObjectName="Flat File Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="E:\My DWBI Assignment\Source\accumilative factTable.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="userID"
+              DTS:DTSID="{A4A33A0D-EEC8-4163-8195-B71E8A05A64A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:DataType="135"
+              DTS:TextQualified="True"
+              DTS:ObjectName="accm_txn_complete_time"
+              DTS:DTSID="{C064EC4D-250C-4037-B215-E444CA296C6E}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LAPTOP-B183G8T7.HetRecMovies_DW]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{D462CBBC-383B-4B96-ACE2-269EFA977EEA}"
+      DTS:ObjectName="LAPTOP-B183G8T7.HetRecMovies_DW">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=LAPTOP-B183G8T7;Initial Catalog=HetRecMovies_DW;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\accumulative factUserRatedMovies"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{26415955-C045-42EF-9725-FA6E2F71FBDB}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="accumulative factUserRatedMovies"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\accumulative factUserRatedMovies\Derived Column"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\accumulative factUserRatedMovies\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\accumulative factUserRatedMovies\Derived Column.Inputs[Derived Column Input].Columns[accm_txn_complete_time]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="accm_txn_complete_time"
+                      lineageId="Package\accumulative factUserRatedMovies\Merge Join.Outputs[Merge Join Output].Columns[accm_txn_complete_time]" />
+                    <inputColumn
+                      refId="Package\accumulative factUserRatedMovies\Derived Column.Inputs[Derived Column Input].Columns[accm_txn_create_time]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="accm_txn_create_time"
+                      lineageId="Package\accumulative factUserRatedMovies\Merge Join.Outputs[Merge Join Output].Columns[accm_txn_create_time]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\accumulative factUserRatedMovies\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\accumulative factUserRatedMovies\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\Derived Column.Outputs[Derived Column Output].Columns[processTime]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\accumulative factUserRatedMovies\Derived Column.Outputs[Derived Column Output].Columns[processTime]"
+                      name="processTime"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[DATEDIFF]("hh",#{Package\accumulative factUserRatedMovies\Merge Join.Outputs[Merge Join Output].Columns[accm_txn_create_time]},#{Package\accumulative factUserRatedMovies\Merge Join.Outputs[Merge Join Output].Columns[accm_txn_complete_time]})</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">DATEDIFF("hh",accm_txn_create_time,accm_txn_complete_time)</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\accumulative factUserRatedMovies\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\accumulative factUserRatedMovies\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\accumulative factUserRatedMovies\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\accumulative factUserRatedMovies\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\accumulative factUserRatedMovies\Flat File Source"
+              componentClassID="Microsoft.FlatFileSource"
+              contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Flat File Source"
+              localeId="1033"
+              name="Flat File Source"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether zero-length columns are treated as null."
+                  name="RetainNulls">true</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                  name="FileNameColumnName"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\accumulative factUserRatedMovies\Flat File Source.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Flat File Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Flat File Connection Manager]"
+                  name="FlatFileConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\accumulative factUserRatedMovies\Flat File Source.Outputs[Flat File Source Output]"
+                  name="Flat File Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\Flat File Source.Outputs[Flat File Source Output].Columns[userID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\accumulative factUserRatedMovies\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[userID]"
+                      lineageId="Package\accumulative factUserRatedMovies\Flat File Source.Outputs[Flat File Source Output].Columns[userID]"
+                      name="userID"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\Flat File Source.Outputs[Flat File Source Output].Columns[accm_txn_complete_time]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\accumulative factUserRatedMovies\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[accm_txn_complete_time]"
+                      lineageId="Package\accumulative factUserRatedMovies\Flat File Source.Outputs[Flat File Source Output].Columns[accm_txn_complete_time]"
+                      name="accm_txn_complete_time"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\accumulative factUserRatedMovies\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[userID]"
+                      dataType="i4"
+                      name="userID" />
+                    <externalMetadataColumn
+                      refId="Package\accumulative factUserRatedMovies\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[accm_txn_complete_time]"
+                      dataType="dbTimeStamp"
+                      name="accm_txn_complete_time" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\accumulative factUserRatedMovies\Flat File Source.Outputs[Flat File Source Error Output]"
+                  isErrorOut="true"
+                  name="Flat File Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\Flat File Source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      codePage="1252"
+                      dataType="text"
+                      description="Flat File Source Error Output Column"
+                      lineageId="Package\accumulative factUserRatedMovies\Flat File Source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      name="Flat File Source Error Output Column" />
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\accumulative factUserRatedMovies\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\accumulative factUserRatedMovies\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\accumulative factUserRatedMovies\Merge Join"
+              componentClassID="Microsoft.MergeJoin"
+              contactInfo="Merge Join;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combine two sorted data flows into one using the FULL, LEFT, or INNER join. We recommend this transformation when data flows can be sorted at their sources."
+              name="Merge Join"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of join to perform."
+                  name="JoinType"
+                  typeConverter="JoinType">2</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the number of columns in the ordering key."
+                  name="NumKeyColumns">1</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the null values are treated as equal values."
+                  name="TreatNullsAsEqual">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Indicates the requested maximum buffers per input before blocking."
+                  name="MaxBuffersPerInput">5</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\accumulative factUserRatedMovies\Merge Join.Inputs[Merge Join Left Input]"
+                  hasSideEffects="true"
+                  name="Merge Join Left Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\accumulative factUserRatedMovies\Merge Join.Inputs[Merge Join Left Input].Columns[userID]"
+                      cachedDataType="i4"
+                      cachedName="userID"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\accumulative factUserRatedMovies\Sort.Outputs[Sort Output].Columns[userID]" />
+                    <inputColumn
+                      refId="Package\accumulative factUserRatedMovies\Merge Join.Inputs[Merge Join Left Input].Columns[accm_txn_complete_time]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="accm_txn_complete_time"
+                      lineageId="Package\accumulative factUserRatedMovies\Sort.Outputs[Sort Output].Columns[accm_txn_complete_time]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\accumulative factUserRatedMovies\Merge Join.Inputs[Merge Join Right Input]"
+                  hasSideEffects="true"
+                  name="Merge Join Right Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\accumulative factUserRatedMovies\Merge Join.Inputs[Merge Join Right Input].Columns[userID]"
+                      cachedDataType="i4"
+                      cachedName="userID"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\accumulative factUserRatedMovies\Sort 1.Outputs[Sort Output].Columns[userID]" />
+                    <inputColumn
+                      refId="Package\accumulative factUserRatedMovies\Merge Join.Inputs[Merge Join Right Input].Columns[MovieKey]"
+                      cachedDataType="i4"
+                      cachedName="MovieKey"
+                      lineageId="Package\accumulative factUserRatedMovies\Sort 1.Outputs[Sort Output].Columns[MovieKey]" />
+                    <inputColumn
+                      refId="Package\accumulative factUserRatedMovies\Merge Join.Inputs[Merge Join Right Input].Columns[MovieActorKey]"
+                      cachedDataType="i4"
+                      cachedName="MovieActorKey"
+                      lineageId="Package\accumulative factUserRatedMovies\Sort 1.Outputs[Sort Output].Columns[MovieActorKey]" />
+                    <inputColumn
+                      refId="Package\accumulative factUserRatedMovies\Merge Join.Inputs[Merge Join Right Input].Columns[MovieGenreKey]"
+                      cachedDataType="i4"
+                      cachedName="MovieGenreKey"
+                      lineageId="Package\accumulative factUserRatedMovies\Sort 1.Outputs[Sort Output].Columns[MovieGenreKey]" />
+                    <inputColumn
+                      refId="Package\accumulative factUserRatedMovies\Merge Join.Inputs[Merge Join Right Input].Columns[UDate]"
+                      cachedDataType="i4"
+                      cachedName="UDate"
+                      lineageId="Package\accumulative factUserRatedMovies\Sort 1.Outputs[Sort Output].Columns[UDate]" />
+                    <inputColumn
+                      refId="Package\accumulative factUserRatedMovies\Merge Join.Inputs[Merge Join Right Input].Columns[rating]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="rating"
+                      lineageId="Package\accumulative factUserRatedMovies\Sort 1.Outputs[Sort Output].Columns[rating]" />
+                    <inputColumn
+                      refId="Package\accumulative factUserRatedMovies\Merge Join.Inputs[Merge Join Right Input].Columns[Uyear]"
+                      cachedDataType="i4"
+                      cachedName="Uyear"
+                      lineageId="Package\accumulative factUserRatedMovies\Sort 1.Outputs[Sort Output].Columns[Uyear]" />
+                    <inputColumn
+                      refId="Package\accumulative factUserRatedMovies\Merge Join.Inputs[Merge Join Right Input].Columns[Umonth]"
+                      cachedDataType="i4"
+                      cachedName="Umonth"
+                      lineageId="Package\accumulative factUserRatedMovies\Sort 1.Outputs[Sort Output].Columns[Umonth]" />
+                    <inputColumn
+                      refId="Package\accumulative factUserRatedMovies\Merge Join.Inputs[Merge Join Right Input].Columns[Uday]"
+                      cachedDataType="i4"
+                      cachedName="Uday"
+                      lineageId="Package\accumulative factUserRatedMovies\Sort 1.Outputs[Sort Output].Columns[Uday]" />
+                    <inputColumn
+                      refId="Package\accumulative factUserRatedMovies\Merge Join.Inputs[Merge Join Right Input].Columns[accm_txn_create_time]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="accm_txn_create_time"
+                      lineageId="Package\accumulative factUserRatedMovies\Sort 1.Outputs[Sort Output].Columns[accm_txn_create_time]" />
+                    <inputColumn
+                      refId="Package\accumulative factUserRatedMovies\Merge Join.Inputs[Merge Join Right Input].Columns[txn_process_time_hours]"
+                      cachedDataType="i4"
+                      cachedName="txn_process_time_hours"
+                      lineageId="Package\accumulative factUserRatedMovies\Sort 1.Outputs[Sort Output].Columns[txn_process_time_hours]" />
+                    <inputColumn
+                      refId="Package\accumulative factUserRatedMovies\Merge Join.Inputs[Merge Join Right Input].Columns[ModifiedDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ModifiedDate"
+                      lineageId="Package\accumulative factUserRatedMovies\Sort 1.Outputs[Sort Output].Columns[ModifiedDate]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\accumulative factUserRatedMovies\Merge Join.Outputs[Merge Join Output]"
+                  isSorted="true"
+                  name="Merge Join Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\Merge Join.Outputs[Merge Join Output].Columns[userID]"
+                      dataType="i4"
+                      lineageId="Package\accumulative factUserRatedMovies\Merge Join.Outputs[Merge Join Output].Columns[userID]"
+                      name="userID"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\accumulative factUserRatedMovies\Merge Join.Inputs[Merge Join Left Input].Columns[userID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\Merge Join.Outputs[Merge Join Output].Columns[accm_txn_complete_time]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\accumulative factUserRatedMovies\Merge Join.Outputs[Merge Join Output].Columns[accm_txn_complete_time]"
+                      name="accm_txn_complete_time">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\accumulative factUserRatedMovies\Merge Join.Inputs[Merge Join Left Input].Columns[accm_txn_complete_time]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\Merge Join.Outputs[Merge Join Output].Columns[MovieKey]"
+                      dataType="i4"
+                      lineageId="Package\accumulative factUserRatedMovies\Merge Join.Outputs[Merge Join Output].Columns[MovieKey]"
+                      name="MovieKey">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\accumulative factUserRatedMovies\Merge Join.Inputs[Merge Join Right Input].Columns[MovieKey]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\Merge Join.Outputs[Merge Join Output].Columns[MovieActorKey]"
+                      dataType="i4"
+                      lineageId="Package\accumulative factUserRatedMovies\Merge Join.Outputs[Merge Join Output].Columns[MovieActorKey]"
+                      name="MovieActorKey">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\accumulative factUserRatedMovies\Merge Join.Inputs[Merge Join Right Input].Columns[MovieActorKey]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\Merge Join.Outputs[Merge Join Output].Columns[MovieGenreKey]"
+                      dataType="i4"
+                      lineageId="Package\accumulative factUserRatedMovies\Merge Join.Outputs[Merge Join Output].Columns[MovieGenreKey]"
+                      name="MovieGenreKey">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\accumulative factUserRatedMovies\Merge Join.Inputs[Merge Join Right Input].Columns[MovieGenreKey]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\Merge Join.Outputs[Merge Join Output].Columns[UDate]"
+                      dataType="i4"
+                      lineageId="Package\accumulative factUserRatedMovies\Merge Join.Outputs[Merge Join Output].Columns[UDate]"
+                      name="UDate">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\accumulative factUserRatedMovies\Merge Join.Inputs[Merge Join Right Input].Columns[UDate]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\Merge Join.Outputs[Merge Join Output].Columns[rating]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\accumulative factUserRatedMovies\Merge Join.Outputs[Merge Join Output].Columns[rating]"
+                      name="rating">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\accumulative factUserRatedMovies\Merge Join.Inputs[Merge Join Right Input].Columns[rating]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\Merge Join.Outputs[Merge Join Output].Columns[Uyear]"
+                      dataType="i4"
+                      lineageId="Package\accumulative factUserRatedMovies\Merge Join.Outputs[Merge Join Output].Columns[Uyear]"
+                      name="Uyear">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\accumulative factUserRatedMovies\Merge Join.Inputs[Merge Join Right Input].Columns[Uyear]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\Merge Join.Outputs[Merge Join Output].Columns[Umonth]"
+                      dataType="i4"
+                      lineageId="Package\accumulative factUserRatedMovies\Merge Join.Outputs[Merge Join Output].Columns[Umonth]"
+                      name="Umonth">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\accumulative factUserRatedMovies\Merge Join.Inputs[Merge Join Right Input].Columns[Umonth]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\Merge Join.Outputs[Merge Join Output].Columns[Uday]"
+                      dataType="i4"
+                      lineageId="Package\accumulative factUserRatedMovies\Merge Join.Outputs[Merge Join Output].Columns[Uday]"
+                      name="Uday">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\accumulative factUserRatedMovies\Merge Join.Inputs[Merge Join Right Input].Columns[Uday]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\Merge Join.Outputs[Merge Join Output].Columns[accm_txn_create_time]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\accumulative factUserRatedMovies\Merge Join.Outputs[Merge Join Output].Columns[accm_txn_create_time]"
+                      name="accm_txn_create_time">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\accumulative factUserRatedMovies\Merge Join.Inputs[Merge Join Right Input].Columns[accm_txn_create_time]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\Merge Join.Outputs[Merge Join Output].Columns[txn_process_time_hours]"
+                      dataType="i4"
+                      lineageId="Package\accumulative factUserRatedMovies\Merge Join.Outputs[Merge Join Output].Columns[txn_process_time_hours]"
+                      name="txn_process_time_hours">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\accumulative factUserRatedMovies\Merge Join.Inputs[Merge Join Right Input].Columns[txn_process_time_hours]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\Merge Join.Outputs[Merge Join Output].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\accumulative factUserRatedMovies\Merge Join.Outputs[Merge Join Output].Columns[ModifiedDate]"
+                      name="ModifiedDate">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\accumulative factUserRatedMovies\Merge Join.Inputs[Merge Join Right Input].Columns[ModifiedDate]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\accumulative factUserRatedMovies\OLE DB Command"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+              name="OLE DB Command"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE [dbo].[FactUserRatedMovies] SET [accm_txn_complete_time] = ?, [txn_process_time_hours] =? WHERE [userID] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\accumulative factUserRatedMovies\OLE DB Command.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LAPTOP-B183G8T7.HetRecMovies_DW]"
+                  connectionManagerRefId="Package.ConnectionManagers[LAPTOP-B183G8T7.HetRecMovies_DW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\accumulative factUserRatedMovies\OLE DB Command.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Command Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\accumulative factUserRatedMovies\OLE DB Command.Inputs[OLE DB Command Input].Columns[accm_txn_complete_time]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="accm_txn_complete_time"
+                      externalMetadataColumnId="Package\accumulative factUserRatedMovies\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      lineageId="Package\accumulative factUserRatedMovies\Merge Join.Outputs[Merge Join Output].Columns[accm_txn_complete_time]" />
+                    <inputColumn
+                      refId="Package\accumulative factUserRatedMovies\OLE DB Command.Inputs[OLE DB Command Input].Columns[userID]"
+                      cachedDataType="i4"
+                      cachedName="userID"
+                      cachedSortKeyPosition="1"
+                      externalMetadataColumnId="Package\accumulative factUserRatedMovies\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
+                      lineageId="Package\accumulative factUserRatedMovies\Merge Join.Outputs[Merge Join Output].Columns[userID]" />
+                    <inputColumn
+                      refId="Package\accumulative factUserRatedMovies\OLE DB Command.Inputs[OLE DB Command Input].Columns[processTime]"
+                      cachedDataType="i4"
+                      cachedName="processTime"
+                      externalMetadataColumnId="Package\accumulative factUserRatedMovies\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      lineageId="Package\accumulative factUserRatedMovies\Derived Column.Outputs[Derived Column Output].Columns[processTime]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\accumulative factUserRatedMovies\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      dataType="dbTimeStamp"
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\accumulative factUserRatedMovies\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      dataType="i4"
+                      name="Param_1">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\accumulative factUserRatedMovies\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
+                      dataType="i4"
+                      name="Param_2">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\accumulative factUserRatedMovies\OLE DB Command.Outputs[OLE DB Command Output]"
+                  exclusionGroup="1"
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\accumulative factUserRatedMovies\OLE DB Command.Inputs[OLE DB Command Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\accumulative factUserRatedMovies\OLE DB Command.Outputs[OLE DB Command Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\accumulative factUserRatedMovies\OLE DB Command.Inputs[OLE DB Command Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\accumulative factUserRatedMovies\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\accumulative factUserRatedMovies\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\accumulative factUserRatedMovies\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[FactUserRatedMovies]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\accumulative factUserRatedMovies\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LAPTOP-B183G8T7.HetRecMovies_DW]"
+                  connectionManagerRefId="Package.ConnectionManagers[LAPTOP-B183G8T7.HetRecMovies_DW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[MovieKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MovieKey]"
+                      lineageId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[MovieKey]"
+                      name="MovieKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[MovieActorKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MovieActorKey]"
+                      lineageId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[MovieActorKey]"
+                      name="MovieActorKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[MovieGenreKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MovieGenreKey]"
+                      lineageId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[MovieGenreKey]"
+                      name="MovieGenreKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[UDate]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[UDate]"
+                      lineageId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[UDate]"
+                      name="UDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[userID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[userID]"
+                      lineageId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[userID]"
+                      name="userID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[rating]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[rating]"
+                      length="50"
+                      lineageId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[rating]"
+                      name="rating"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[Uyear]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Uyear]"
+                      lineageId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[Uyear]"
+                      name="Uyear"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[Umonth]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Umonth]"
+                      lineageId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[Umonth]"
+                      name="Umonth"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[Uday]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Uday]"
+                      lineageId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[Uday]"
+                      name="Uday"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[accm_txn_create_time]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[accm_txn_create_time]"
+                      lineageId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[accm_txn_create_time]"
+                      name="accm_txn_create_time"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[accm_txn_complete_time]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[accm_txn_complete_time]"
+                      lineageId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[accm_txn_complete_time]"
+                      name="accm_txn_complete_time"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[txn_process_time_hours]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[txn_process_time_hours]"
+                      lineageId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[txn_process_time_hours]"
+                      name="txn_process_time_hours"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ModifiedDate]"
+                      lineageId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[ModifiedDate]"
+                      name="ModifiedDate"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MovieKey]"
+                      dataType="i4"
+                      name="MovieKey" />
+                    <externalMetadataColumn
+                      refId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MovieActorKey]"
+                      dataType="i4"
+                      name="MovieActorKey" />
+                    <externalMetadataColumn
+                      refId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MovieGenreKey]"
+                      dataType="i4"
+                      name="MovieGenreKey" />
+                    <externalMetadataColumn
+                      refId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[UDate]"
+                      dataType="i4"
+                      name="UDate" />
+                    <externalMetadataColumn
+                      refId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[userID]"
+                      dataType="i4"
+                      name="userID" />
+                    <externalMetadataColumn
+                      refId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[rating]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="rating" />
+                    <externalMetadataColumn
+                      refId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Uyear]"
+                      dataType="i4"
+                      name="Uyear" />
+                    <externalMetadataColumn
+                      refId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Umonth]"
+                      dataType="i4"
+                      name="Umonth" />
+                    <externalMetadataColumn
+                      refId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Uday]"
+                      dataType="i4"
+                      name="Uday" />
+                    <externalMetadataColumn
+                      refId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[accm_txn_create_time]"
+                      dataType="dbTimeStamp"
+                      name="accm_txn_create_time" />
+                    <externalMetadataColumn
+                      refId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[accm_txn_complete_time]"
+                      dataType="dbTimeStamp"
+                      name="accm_txn_complete_time" />
+                    <externalMetadataColumn
+                      refId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[txn_process_time_hours]"
+                      dataType="i4"
+                      name="txn_process_time_hours" />
+                    <externalMetadataColumn
+                      refId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="ModifiedDate" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MovieKey]"
+                      dataType="i4"
+                      lineageId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MovieKey]"
+                      name="MovieKey" />
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MovieActorKey]"
+                      dataType="i4"
+                      lineageId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MovieActorKey]"
+                      name="MovieActorKey" />
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MovieGenreKey]"
+                      dataType="i4"
+                      lineageId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MovieGenreKey]"
+                      name="MovieGenreKey" />
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[UDate]"
+                      dataType="i4"
+                      lineageId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[UDate]"
+                      name="UDate" />
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[userID]"
+                      dataType="i4"
+                      lineageId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[userID]"
+                      name="userID" />
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[rating]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[rating]"
+                      name="rating" />
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Uyear]"
+                      dataType="i4"
+                      lineageId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Uyear]"
+                      name="Uyear" />
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Umonth]"
+                      dataType="i4"
+                      lineageId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Umonth]"
+                      name="Umonth" />
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Uday]"
+                      dataType="i4"
+                      lineageId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Uday]"
+                      name="Uday" />
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[accm_txn_create_time]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[accm_txn_create_time]"
+                      name="accm_txn_create_time" />
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[accm_txn_complete_time]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[accm_txn_complete_time]"
+                      name="accm_txn_complete_time" />
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[txn_process_time_hours]"
+                      dataType="i4"
+                      lineageId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[txn_process_time_hours]"
+                      name="txn_process_time_hours" />
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ModifiedDate]"
+                      name="ModifiedDate" />
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\accumulative factUserRatedMovies\Sort"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
+              name="Sort"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the maximum number of threads to use for sorting."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\accumulative factUserRatedMovies\Sort.Inputs[Sort Input]"
+                  name="Sort Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\accumulative factUserRatedMovies\Sort.Inputs[Sort Input].Columns[userID]"
+                      cachedDataType="i4"
+                      cachedName="userID"
+                      lineageId="Package\accumulative factUserRatedMovies\Flat File Source.Outputs[Flat File Source Output].Columns[userID]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\accumulative factUserRatedMovies\Sort.Inputs[Sort Input].Columns[accm_txn_complete_time]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="accm_txn_complete_time"
+                      lineageId="Package\accumulative factUserRatedMovies\Flat File Source.Outputs[Flat File Source Output].Columns[accm_txn_complete_time]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\accumulative factUserRatedMovies\Sort.Outputs[Sort Output]"
+                  isSorted="true"
+                  name="Sort Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\Sort.Outputs[Sort Output].Columns[userID]"
+                      dataType="i4"
+                      lineageId="Package\accumulative factUserRatedMovies\Sort.Outputs[Sort Output].Columns[userID]"
+                      name="userID"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\accumulative factUserRatedMovies\Flat File Source.Outputs[Flat File Source Output].Columns[userID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\Sort.Outputs[Sort Output].Columns[accm_txn_complete_time]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\accumulative factUserRatedMovies\Sort.Outputs[Sort Output].Columns[accm_txn_complete_time]"
+                      name="accm_txn_complete_time">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\accumulative factUserRatedMovies\Flat File Source.Outputs[Flat File Source Output].Columns[accm_txn_complete_time]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\accumulative factUserRatedMovies\Sort 1"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
+              name="Sort 1"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the maximum number of threads to use for sorting."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\accumulative factUserRatedMovies\Sort 1.Inputs[Sort Input]"
+                  name="Sort Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\accumulative factUserRatedMovies\Sort 1.Inputs[Sort Input].Columns[MovieKey]"
+                      cachedDataType="i4"
+                      cachedName="MovieKey"
+                      lineageId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[MovieKey]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\accumulative factUserRatedMovies\Sort 1.Inputs[Sort Input].Columns[MovieActorKey]"
+                      cachedDataType="i4"
+                      cachedName="MovieActorKey"
+                      lineageId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[MovieActorKey]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\accumulative factUserRatedMovies\Sort 1.Inputs[Sort Input].Columns[MovieGenreKey]"
+                      cachedDataType="i4"
+                      cachedName="MovieGenreKey"
+                      lineageId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[MovieGenreKey]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\accumulative factUserRatedMovies\Sort 1.Inputs[Sort Input].Columns[UDate]"
+                      cachedDataType="i4"
+                      cachedName="UDate"
+                      lineageId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[UDate]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\accumulative factUserRatedMovies\Sort 1.Inputs[Sort Input].Columns[userID]"
+                      cachedDataType="i4"
+                      cachedName="userID"
+                      lineageId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[userID]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\accumulative factUserRatedMovies\Sort 1.Inputs[Sort Input].Columns[rating]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="rating"
+                      lineageId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[rating]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\accumulative factUserRatedMovies\Sort 1.Inputs[Sort Input].Columns[Uyear]"
+                      cachedDataType="i4"
+                      cachedName="Uyear"
+                      lineageId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[Uyear]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\accumulative factUserRatedMovies\Sort 1.Inputs[Sort Input].Columns[Umonth]"
+                      cachedDataType="i4"
+                      cachedName="Umonth"
+                      lineageId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[Umonth]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\accumulative factUserRatedMovies\Sort 1.Inputs[Sort Input].Columns[Uday]"
+                      cachedDataType="i4"
+                      cachedName="Uday"
+                      lineageId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[Uday]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\accumulative factUserRatedMovies\Sort 1.Inputs[Sort Input].Columns[accm_txn_create_time]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="accm_txn_create_time"
+                      lineageId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[accm_txn_create_time]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\accumulative factUserRatedMovies\Sort 1.Inputs[Sort Input].Columns[accm_txn_complete_time]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="accm_txn_complete_time"
+                      lineageId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[accm_txn_complete_time]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\accumulative factUserRatedMovies\Sort 1.Inputs[Sort Input].Columns[txn_process_time_hours]"
+                      cachedDataType="i4"
+                      cachedName="txn_process_time_hours"
+                      lineageId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[txn_process_time_hours]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\accumulative factUserRatedMovies\Sort 1.Inputs[Sort Input].Columns[ModifiedDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ModifiedDate"
+                      lineageId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[ModifiedDate]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\accumulative factUserRatedMovies\Sort 1.Outputs[Sort Output]"
+                  isSorted="true"
+                  name="Sort Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\Sort 1.Outputs[Sort Output].Columns[MovieKey]"
+                      dataType="i4"
+                      lineageId="Package\accumulative factUserRatedMovies\Sort 1.Outputs[Sort Output].Columns[MovieKey]"
+                      name="MovieKey">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[MovieKey]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\Sort 1.Outputs[Sort Output].Columns[MovieActorKey]"
+                      dataType="i4"
+                      lineageId="Package\accumulative factUserRatedMovies\Sort 1.Outputs[Sort Output].Columns[MovieActorKey]"
+                      name="MovieActorKey">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[MovieActorKey]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\Sort 1.Outputs[Sort Output].Columns[MovieGenreKey]"
+                      dataType="i4"
+                      lineageId="Package\accumulative factUserRatedMovies\Sort 1.Outputs[Sort Output].Columns[MovieGenreKey]"
+                      name="MovieGenreKey">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[MovieGenreKey]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\Sort 1.Outputs[Sort Output].Columns[UDate]"
+                      dataType="i4"
+                      lineageId="Package\accumulative factUserRatedMovies\Sort 1.Outputs[Sort Output].Columns[UDate]"
+                      name="UDate">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[UDate]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\Sort 1.Outputs[Sort Output].Columns[userID]"
+                      dataType="i4"
+                      lineageId="Package\accumulative factUserRatedMovies\Sort 1.Outputs[Sort Output].Columns[userID]"
+                      name="userID"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[userID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\Sort 1.Outputs[Sort Output].Columns[rating]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\accumulative factUserRatedMovies\Sort 1.Outputs[Sort Output].Columns[rating]"
+                      name="rating">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[rating]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\Sort 1.Outputs[Sort Output].Columns[Uyear]"
+                      dataType="i4"
+                      lineageId="Package\accumulative factUserRatedMovies\Sort 1.Outputs[Sort Output].Columns[Uyear]"
+                      name="Uyear">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[Uyear]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\Sort 1.Outputs[Sort Output].Columns[Umonth]"
+                      dataType="i4"
+                      lineageId="Package\accumulative factUserRatedMovies\Sort 1.Outputs[Sort Output].Columns[Umonth]"
+                      name="Umonth">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[Umonth]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\Sort 1.Outputs[Sort Output].Columns[Uday]"
+                      dataType="i4"
+                      lineageId="Package\accumulative factUserRatedMovies\Sort 1.Outputs[Sort Output].Columns[Uday]"
+                      name="Uday">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[Uday]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\Sort 1.Outputs[Sort Output].Columns[accm_txn_create_time]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\accumulative factUserRatedMovies\Sort 1.Outputs[Sort Output].Columns[accm_txn_create_time]"
+                      name="accm_txn_create_time">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[accm_txn_create_time]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\Sort 1.Outputs[Sort Output].Columns[accm_txn_complete_time]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\accumulative factUserRatedMovies\Sort 1.Outputs[Sort Output].Columns[accm_txn_complete_time]"
+                      name="accm_txn_complete_time">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[accm_txn_complete_time]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\Sort 1.Outputs[Sort Output].Columns[txn_process_time_hours]"
+                      dataType="i4"
+                      lineageId="Package\accumulative factUserRatedMovies\Sort 1.Outputs[Sort Output].Columns[txn_process_time_hours]"
+                      name="txn_process_time_hours">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[txn_process_time_hours]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative factUserRatedMovies\Sort 1.Outputs[Sort Output].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\accumulative factUserRatedMovies\Sort 1.Outputs[Sort Output].Columns[ModifiedDate]"
+                      name="ModifiedDate">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output].Columns[ModifiedDate]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\accumulative factUserRatedMovies.Paths[Derived Column Output]"
+              endId="Package\accumulative factUserRatedMovies\OLE DB Command.Inputs[OLE DB Command Input]"
+              name="Derived Column Output"
+              startId="Package\accumulative factUserRatedMovies\Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\accumulative factUserRatedMovies.Paths[Flat File Source Output]"
+              endId="Package\accumulative factUserRatedMovies\Sort.Inputs[Sort Input]"
+              name="Flat File Source Output"
+              startId="Package\accumulative factUserRatedMovies\Flat File Source.Outputs[Flat File Source Output]" />
+            <path
+              refId="Package\accumulative factUserRatedMovies.Paths[Merge Join Output]"
+              endId="Package\accumulative factUserRatedMovies\Derived Column.Inputs[Derived Column Input]"
+              name="Merge Join Output"
+              startId="Package\accumulative factUserRatedMovies\Merge Join.Outputs[Merge Join Output]" />
+            <path
+              refId="Package\accumulative factUserRatedMovies.Paths[OLE DB Source Output]"
+              endId="Package\accumulative factUserRatedMovies\Sort 1.Inputs[Sort Input]"
+              name="OLE DB Source Output"
+              startId="Package\accumulative factUserRatedMovies\OLE DB Source.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\accumulative factUserRatedMovies.Paths[Sort Output]"
+              endId="Package\accumulative factUserRatedMovies\Merge Join.Inputs[Merge Join Left Input]"
+              name="Sort Output"
+              startId="Package\accumulative factUserRatedMovies\Sort.Outputs[Sort Output]" />
+            <path
+              refId="Package\accumulative factUserRatedMovies.Paths[Sort Output1]"
+              endId="Package\accumulative factUserRatedMovies\Merge Join.Inputs[Merge Join Right Input]"
+              name="Sort Output"
+              startId="Package\accumulative factUserRatedMovies\Sort 1.Outputs[Sort Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="240.8,41.6"
+          Id="Package\accumulative factUserRatedMovies"
+          TopLeft="280.000004768372,45.1176476915815" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\accumulative factUserRatedMovies">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="150.4,41.6"
+          Id="Package\accumulative factUserRatedMovies\Flat File Source"
+          TopLeft="134.285716572586,42.8235300123485" />
+        <NodeLayout
+          Size="129.6,41.6"
+          Id="Package\accumulative factUserRatedMovies\Merge Join"
+          TopLeft="297.14286220317,221.764708992519" />
+        <NodeLayout
+          Size="149.6,41.6"
+          Id="Package\accumulative factUserRatedMovies\OLE DB Source"
+          TopLeft="422.857150058357,45.8823535846592" />
+        <NodeLayout
+          Size="106.4,41.6"
+          Id="Package\accumulative factUserRatedMovies\Sort 1"
+          TopLeft="450.000007663454,131.529413609356" />
+        <NodeLayout
+          Size="164.8,41.6"
+          Id="Package\accumulative factUserRatedMovies\OLE DB Command"
+          TopLeft="304.285719467669,406.058829224234" />
+        <NodeLayout
+          Size="97.6,41.6"
+          Id="Package\accumulative factUserRatedMovies\Sort"
+          TopLeft="162.142859904134,130.764707716279" />
+        <NodeLayout
+          Size="152.8,41.6"
+          Id="Package\accumulative factUserRatedMovies\Derived Column"
+          TopLeft="297.85714792962,316.588239734148" />
+        <EdgeLayout
+          Id="Package\accumulative factUserRatedMovies.Paths[Flat File Source Output]"
+          TopLeft="210.21428823836,84.4235300123486">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,46.34117770393"
+              Start="0,0"
+              End="0,38.84117770393">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,38.84117770393" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\accumulative factUserRatedMovies.Paths[Derived Column Output]"
+          TopLeft="374.25714792962,358.188239734148">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="12.4285715380495,47.8705894900854"
+              Start="0,0"
+              End="12.4285715380495,40.3705894900854">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.9352947450427" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,19.9352947450427"
+                    Point2="0,23.9352947450427"
+                    Point3="4,23.9352947450427" />
+                  <mssgle:LineSegment
+                    End="8.42857153804948,23.9352947450427" />
+                  <mssgle:CubicBezierSegment
+                    Point1="8.42857153804948,23.9352947450427"
+                    Point2="12.4285715380495,23.9352947450427"
+                    Point3="12.4285715380495,27.9352947450427" />
+                  <mssgle:LineSegment
+                    End="12.4285715380495,40.3705894900854" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\accumulative factUserRatedMovies.Paths[Sort Output1]"
+          TopLeft="503.200007663454,173.129413609356">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-120.990478793618,48.6352953831629"
+              Start="0,0"
+              End="-120.990478793618,41.1352953831629">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.825309214899" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,24.825309214899"
+                    Point2="0,28.825309214899"
+                    Point3="-4,28.825309214899" />
+                  <mssgle:LineSegment
+                    End="-116.990478793618,28.825309214899" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-116.990478793618,28.825309214899"
+                    Point2="-120.990478793618,28.825309214899"
+                    Point3="-120.990478793618,32.825309214899" />
+                  <mssgle:LineSegment
+                    End="-120.990478793618,41.1352953831629" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\accumulative factUserRatedMovies.Paths[Sort Output]"
+          TopLeft="210.942859904134,172.364707716279">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="151.000002299036,49.4000012762406"
+              Start="0,0"
+              End="151.000002299036,41.9000012762406">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.7000006381203" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.7000006381203"
+                    Point2="0,24.7000006381203"
+                    Point3="4,24.7000006381203" />
+                  <mssgle:LineSegment
+                    End="147.000002299036,24.7000006381203" />
+                  <mssgle:CubicBezierSegment
+                    Point1="147.000002299036,24.7000006381203"
+                    Point2="151.000002299036,24.7000006381203"
+                    Point3="151.000002299036,28.7000006381203" />
+                  <mssgle:LineSegment
+                    End="151.000002299036,41.9000012762406" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\accumulative factUserRatedMovies.Paths[OLE DB Source Output]"
+          TopLeft="500.428578860906,87.4823535846592">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,44.0470600246971"
+              Start="0,0"
+              End="0,36.5470600246971">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.5470600246971" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\accumulative factUserRatedMovies.Paths[Merge Join Output]"
+          TopLeft="361.94286220317,263.364708992519">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="12.31428572645,53.223530741629"
+              Start="0,0"
+              End="12.31428572645,45.723530741629">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.6117653708145" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22.6117653708145"
+                    Point2="0,26.6117653708145"
+                    Point3="4,26.6117653708145" />
+                  <mssgle:LineSegment
+                    End="8.31428572645001,26.6117653708145" />
+                  <mssgle:CubicBezierSegment
+                    Point1="8.31428572645001,26.6117653708145"
+                    Point2="12.31428572645,26.6117653708145"
+                    Point3="12.31428572645,30.6117653708145" />
+                  <mssgle:LineSegment
+                    End="12.31428572645,45.723530741629" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\accumulative factUserRatedMovies\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

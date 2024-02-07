@@ -1,0 +1,3360 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/2/2022 11:37:30 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LAPTOP-B183G8T7"
+  DTS:CreatorName="LAPTOP-B183G8T7\Thilini"
+  DTS:DTSID="{EA193F2E-08EA-4E18-BF64-18AE445E7D60}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.180"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="HetRec_Load_Staging"
+  DTS:PackageType="5"
+  DTS:VersionBuild="37"
+  DTS:VersionGUID="{A7DBBE82-F938-4EA1-8E7F-C107A2968DB9}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Flat File Connection Manager]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{9DEB2F41-EF8B-4839-AFD1-D702FB3C9D83}"
+      DTS:ObjectName="Flat File Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="C:\HetRecMovies\movies.txt">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:DataType="131"
+              DTS:DataPrecision="18"
+              DTS:TextQualified="True"
+              DTS:ObjectName="movieID"
+              DTS:DTSID="{76C4D0F8-80AA-4C71-9A1B-79B9B1AF17BB}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="title"
+              DTS:DTSID="{D10F6AB9-2DB4-42D7-9F3D-28A7101E448F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="imdbID"
+              DTS:DTSID="{42338EEA-1257-45ED-91CB-10AC19DA697C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="year"
+              DTS:DTSID="{FACFD06B-B7D9-48F2-ABA0-2F6562387838}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="rottenTomatoesID"
+              DTS:DTSID="{8F06BBB0-E9F6-4D11-9251-E1AA8DF1E5B0}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LAPTOP-B183G8T7.HetRecMovies_SourceDB]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{74A2B86C-DC07-46AA-BB7C-11A31CF4075A}"
+      DTS:ObjectName="LAPTOP-B183G8T7.HetRecMovies_SourceDB">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=LAPTOP-B183G8T7;Initial Catalog=HetRecMovies_SourceDB;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LAPTOP-B183G8T7.HetRecMovies_Staging]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{6B106B29-857B-4857-A2B9-6C4A328DE549}"
+      DTS:ObjectName="LAPTOP-B183G8T7.HetRecMovies_Staging">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=LAPTOP-B183G8T7;Initial Catalog=HetRecMovies_Staging;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Movies Data to Staging"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{E371571B-057C-4CD0-8BC8-4DD472CEFFC7}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Movies Data to Staging"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:EventHandlers>
+        <DTS:EventHandler
+          DTS:refId="Package\Movies Data to Staging.EventHandlers[OnPreExecute]"
+          DTS:CreationName="OnPreExecute"
+          DTS:DTSID="{A81BBEEF-B6C5-4F0B-AB45-C939B721C20E}"
+          DTS:EventID="0"
+          DTS:EventName="OnPreExecute"
+          DTS:LocaleID="-1">
+          <DTS:Variables>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:Description="The propagate property of the event"
+              DTS:DTSID="{9A184230-9692-4510-A266-198FC62B97E7}"
+              DTS:IncludeInDebugDump="6789"
+              DTS:Namespace="System"
+              DTS:ObjectName="Propagate">
+              <DTS:VariableValue
+                DTS:DataType="11">-1</DTS:VariableValue>
+            </DTS:Variable>
+          </DTS:Variables>
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Movies Data to Staging.EventHandlers[OnPreExecute]\truncate STG Movies"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{7D97F8D1-C69D-427F-BF1D-454A079AD954}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="truncate STG Movies"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{6B106B29-857B-4857-A2B9-6C4A328DE549}"
+                  SQLTask:SqlStatementSource="truncate table [HetRecMovies_Staging].[dbo].[Movies_Staging]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+        </DTS:EventHandler>
+      </DTS:EventHandlers>
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Movies Data to Staging\Flat File Source"
+              componentClassID="Microsoft.FlatFileSource"
+              contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Flat File Source"
+              localeId="1033"
+              name="Flat File Source"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether zero-length columns are treated as null."
+                  name="RetainNulls">true</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                  name="FileNameColumnName"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Movies Data to Staging\Flat File Source.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Flat File Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Flat File Connection Manager]"
+                  name="FlatFileConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Movies Data to Staging\Flat File Source.Outputs[Flat File Source Output]"
+                  name="Flat File Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Movies Data to Staging\Flat File Source.Outputs[Flat File Source Output].Columns[movieID]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Movies Data to Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[movieID]"
+                      lineageId="Package\Movies Data to Staging\Flat File Source.Outputs[Flat File Source Output].Columns[movieID]"
+                      name="movieID"
+                      precision="18"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Movies Data to Staging\Flat File Source.Outputs[Flat File Source Output].Columns[title]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Movies Data to Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[title]"
+                      length="500"
+                      lineageId="Package\Movies Data to Staging\Flat File Source.Outputs[Flat File Source Output].Columns[title]"
+                      name="title"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Movies Data to Staging\Flat File Source.Outputs[Flat File Source Output].Columns[imdbID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Movies Data to Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[imdbID]"
+                      length="50"
+                      lineageId="Package\Movies Data to Staging\Flat File Source.Outputs[Flat File Source Output].Columns[imdbID]"
+                      name="imdbID"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Movies Data to Staging\Flat File Source.Outputs[Flat File Source Output].Columns[year]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Movies Data to Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[year]"
+                      length="50"
+                      lineageId="Package\Movies Data to Staging\Flat File Source.Outputs[Flat File Source Output].Columns[year]"
+                      name="year"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Movies Data to Staging\Flat File Source.Outputs[Flat File Source Output].Columns[rottenTomatoesID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Movies Data to Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[rottenTomatoesID]"
+                      length="50"
+                      lineageId="Package\Movies Data to Staging\Flat File Source.Outputs[Flat File Source Output].Columns[rottenTomatoesID]"
+                      name="rottenTomatoesID"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Movies Data to Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[movieID]"
+                      dataType="numeric"
+                      name="movieID"
+                      precision="18" />
+                    <externalMetadataColumn
+                      refId="Package\Movies Data to Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[title]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="title" />
+                    <externalMetadataColumn
+                      refId="Package\Movies Data to Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[imdbID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="imdbID" />
+                    <externalMetadataColumn
+                      refId="Package\Movies Data to Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[year]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="year" />
+                    <externalMetadataColumn
+                      refId="Package\Movies Data to Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[rottenTomatoesID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="rottenTomatoesID" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Movies Data to Staging\Flat File Source.Outputs[Flat File Source Error Output]"
+                  isErrorOut="true"
+                  name="Flat File Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Movies Data to Staging\Flat File Source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      codePage="1252"
+                      dataType="text"
+                      description="Flat File Source Error Output Column"
+                      lineageId="Package\Movies Data to Staging\Flat File Source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      name="Flat File Source Error Output Column" />
+                    <outputColumn
+                      refId="Package\Movies Data to Staging\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Movies Data to Staging\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Movies Data to Staging\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Movies Data to Staging\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Movies Data to Staging\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Movies_Staging]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Movies Data to Staging\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LAPTOP-B183G8T7.HetRecMovies_Staging]"
+                  connectionManagerRefId="Package.ConnectionManagers[LAPTOP-B183G8T7.HetRecMovies_Staging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Movies Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Movies Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[movieID]"
+                      cachedDataType="numeric"
+                      cachedName="movieID"
+                      cachedPrecision="18"
+                      externalMetadataColumnId="Package\Movies Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[movieID]"
+                      lineageId="Package\Movies Data to Staging\Flat File Source.Outputs[Flat File Source Output].Columns[movieID]" />
+                    <inputColumn
+                      refId="Package\Movies Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[title]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="title"
+                      externalMetadataColumnId="Package\Movies Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[title]"
+                      lineageId="Package\Movies Data to Staging\Flat File Source.Outputs[Flat File Source Output].Columns[title]" />
+                    <inputColumn
+                      refId="Package\Movies Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[imdbID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="imdbID"
+                      externalMetadataColumnId="Package\Movies Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[imdbID]"
+                      lineageId="Package\Movies Data to Staging\Flat File Source.Outputs[Flat File Source Output].Columns[imdbID]" />
+                    <inputColumn
+                      refId="Package\Movies Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[year]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="year"
+                      externalMetadataColumnId="Package\Movies Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[year]"
+                      lineageId="Package\Movies Data to Staging\Flat File Source.Outputs[Flat File Source Output].Columns[year]" />
+                    <inputColumn
+                      refId="Package\Movies Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[rottenTomatoesID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="rottenTomatoesID"
+                      externalMetadataColumnId="Package\Movies Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[rottenTomatoesID]"
+                      lineageId="Package\Movies Data to Staging\Flat File Source.Outputs[Flat File Source Output].Columns[rottenTomatoesID]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Movies Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[movieID]"
+                      dataType="i4"
+                      name="movieID" />
+                    <externalMetadataColumn
+                      refId="Package\Movies Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[title]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="title" />
+                    <externalMetadataColumn
+                      refId="Package\Movies Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[imdbID]"
+                      dataType="i4"
+                      name="imdbID" />
+                    <externalMetadataColumn
+                      refId="Package\Movies Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[year]"
+                      dataType="i4"
+                      name="year" />
+                    <externalMetadataColumn
+                      refId="Package\Movies Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[rottenTomatoesID]"
+                      dataType="i4"
+                      name="rottenTomatoesID" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Movies Data to Staging\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Movies Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Movies Data to Staging\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Movies Data to Staging\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Movies Data to Staging\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Movies Data to Staging\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Movies Data to Staging.Paths[Flat File Source Output]"
+              endId="Package\Movies Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Flat File Source Output"
+              startId="Package\Movies Data to Staging\Flat File Source.Outputs[Flat File Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Movie_Actors Data to Staging"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{FF68783D-4807-4EBD-B299-FF8FB83A6F55}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Movie_Actors Data to Staging"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:EventHandlers>
+        <DTS:EventHandler
+          DTS:refId="Package\Movie_Actors Data to Staging.EventHandlers[OnError]"
+          DTS:CreationName="OnError"
+          DTS:DTSID="{1E1BB0F7-B750-4892-9D70-7B6863B55143}"
+          DTS:EventID="0"
+          DTS:EventName="OnError"
+          DTS:LocaleID="-1">
+          <DTS:Variables>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:Description="The propagate property of the event"
+              DTS:DTSID="{C9145185-8342-430B-B9EE-3BA57A9796C5}"
+              DTS:IncludeInDebugDump="6789"
+              DTS:Namespace="System"
+              DTS:ObjectName="Propagate">
+              <DTS:VariableValue
+                DTS:DataType="11">-1</DTS:VariableValue>
+            </DTS:Variable>
+          </DTS:Variables>
+          <DTS:Executables />
+        </DTS:EventHandler>
+        <DTS:EventHandler
+          DTS:refId="Package\Movie_Actors Data to Staging.EventHandlers[OnPreExecute]"
+          DTS:CreationName="OnPreExecute"
+          DTS:DTSID="{8399E8B4-68A5-421A-AE01-D8604E42395B}"
+          DTS:EventID="0"
+          DTS:EventName="OnPreExecute"
+          DTS:LocaleID="-1">
+          <DTS:Variables>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:Description="The propagate property of the event"
+              DTS:DTSID="{7C951DB3-CE43-42E0-AE7D-FFC08FC0C7B7}"
+              DTS:IncludeInDebugDump="6789"
+              DTS:Namespace="System"
+              DTS:ObjectName="Propagate">
+              <DTS:VariableValue
+                DTS:DataType="11">-1</DTS:VariableValue>
+            </DTS:Variable>
+          </DTS:Variables>
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Movie_Actors Data to Staging.EventHandlers[OnPreExecute]\truncate STG MovieActors"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{3E1901C7-DCD0-43D5-8F0B-2E36205FBF8C}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="truncate STG MovieActors"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{6B106B29-857B-4857-A2B9-6C4A328DE549}"
+                  SQLTask:SqlStatementSource="truncate table [HetRecMovies_Staging].[dbo].[MovieActors_Staging]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+        </DTS:EventHandler>
+      </DTS:EventHandlers>
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Movie_Actors Data to Staging\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[MovieActors_Staging]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Movie_Actors Data to Staging\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LAPTOP-B183G8T7.HetRecMovies_Staging]"
+                  connectionManagerRefId="Package.ConnectionManagers[LAPTOP-B183G8T7.HetRecMovies_Staging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Movie_Actors Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Movie_Actors Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[actorID]"
+                      cachedDataType="i4"
+                      cachedName="actorID"
+                      externalMetadataColumnId="Package\Movie_Actors Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[actorID]"
+                      lineageId="Package\Movie_Actors Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[actorID]" />
+                    <inputColumn
+                      refId="Package\Movie_Actors Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[actorName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="actorName"
+                      externalMetadataColumnId="Package\Movie_Actors Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[actorName]"
+                      lineageId="Package\Movie_Actors Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[actorName]" />
+                    <inputColumn
+                      refId="Package\Movie_Actors Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ranking]"
+                      cachedDataType="i4"
+                      cachedName="ranking"
+                      externalMetadataColumnId="Package\Movie_Actors Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ranking]"
+                      lineageId="Package\Movie_Actors Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[ranking]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Movie_Actors Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[actorID]"
+                      dataType="i4"
+                      name="actorID" />
+                    <externalMetadataColumn
+                      refId="Package\Movie_Actors Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[actorName]"
+                      dataType="wstr"
+                      length="50"
+                      name="actorName" />
+                    <externalMetadataColumn
+                      refId="Package\Movie_Actors Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ranking]"
+                      dataType="i4"
+                      name="ranking" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Movie_Actors Data to Staging\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Movie_Actors Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Movie_Actors Data to Staging\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Movie_Actors Data to Staging\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Movie_Actors Data to Staging\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Movie_Actors Data to Staging\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Movie_Actors Data to Staging\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[movie_actors]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Movie_Actors Data to Staging\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LAPTOP-B183G8T7.HetRecMovies_SourceDB]"
+                  connectionManagerRefId="Package.ConnectionManagers[LAPTOP-B183G8T7.HetRecMovies_SourceDB]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Movie_Actors Data to Staging\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Movie_Actors Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[actorID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Movie_Actors Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[actorID]"
+                      lineageId="Package\Movie_Actors Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[actorID]"
+                      name="actorID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Movie_Actors Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[actorName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Movie_Actors Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[actorName]"
+                      length="50"
+                      lineageId="Package\Movie_Actors Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[actorName]"
+                      name="actorName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Movie_Actors Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[ranking]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Movie_Actors Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ranking]"
+                      lineageId="Package\Movie_Actors Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[ranking]"
+                      name="ranking"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Movie_Actors Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[actorID]"
+                      dataType="i4"
+                      name="actorID" />
+                    <externalMetadataColumn
+                      refId="Package\Movie_Actors Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[actorName]"
+                      dataType="wstr"
+                      length="50"
+                      name="actorName" />
+                    <externalMetadataColumn
+                      refId="Package\Movie_Actors Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ranking]"
+                      dataType="i4"
+                      name="ranking" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Movie_Actors Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Movie_Actors Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[actorID]"
+                      dataType="i4"
+                      lineageId="Package\Movie_Actors Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[actorID]"
+                      name="actorID" />
+                    <outputColumn
+                      refId="Package\Movie_Actors Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[actorName]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Movie_Actors Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[actorName]"
+                      name="actorName" />
+                    <outputColumn
+                      refId="Package\Movie_Actors Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ranking]"
+                      dataType="i4"
+                      lineageId="Package\Movie_Actors Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ranking]"
+                      name="ranking" />
+                    <outputColumn
+                      refId="Package\Movie_Actors Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Movie_Actors Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Movie_Actors Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Movie_Actors Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Movie_Actors Data to Staging.Paths[OLE DB Source Output]"
+              endId="Package\Movie_Actors Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Movie_Actors Data to Staging\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Movie_Genres Data to Staging"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{3CAAC5C7-B598-4113-B57C-74C125E2A99C}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Movie_Genres Data to Staging"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:EventHandlers>
+        <DTS:EventHandler
+          DTS:refId="Package\Movie_Genres Data to Staging.EventHandlers[OnPreExecute]"
+          DTS:CreationName="OnPreExecute"
+          DTS:DTSID="{CA2F2472-6FEC-4514-AFA9-CB8E66028D52}"
+          DTS:EventID="0"
+          DTS:EventName="OnPreExecute"
+          DTS:LocaleID="-1">
+          <DTS:Variables>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:Description="The propagate property of the event"
+              DTS:DTSID="{7D5A405E-5373-42F0-AD64-1F7A3D4F68E3}"
+              DTS:IncludeInDebugDump="6789"
+              DTS:Namespace="System"
+              DTS:ObjectName="Propagate">
+              <DTS:VariableValue
+                DTS:DataType="11">-1</DTS:VariableValue>
+            </DTS:Variable>
+          </DTS:Variables>
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Movie_Genres Data to Staging.EventHandlers[OnPreExecute]\truncate STG movieGenres"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{E61E717F-3E28-4136-AA53-0C7A26E9ECE7}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="truncate STG movieGenres"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{6B106B29-857B-4857-A2B9-6C4A328DE549}"
+                  SQLTask:SqlStatementSource="truncate table [HetRecMovies_Staging].[dbo].[MovieGenres_Staging]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+        </DTS:EventHandler>
+      </DTS:EventHandlers>
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Movie_Genres Data to Staging\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[MovieGenres_Staging]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Movie_Genres Data to Staging\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LAPTOP-B183G8T7.HetRecMovies_Staging]"
+                  connectionManagerRefId="Package.ConnectionManagers[LAPTOP-B183G8T7.HetRecMovies_Staging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Movie_Genres Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Movie_Genres Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[genreMovieID]"
+                      cachedDataType="i4"
+                      cachedName="genreMovieID"
+                      externalMetadataColumnId="Package\Movie_Genres Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[genreMovieID]"
+                      lineageId="Package\Movie_Genres Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[genreMovieID]" />
+                    <inputColumn
+                      refId="Package\Movie_Genres Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[genre]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="genre"
+                      externalMetadataColumnId="Package\Movie_Genres Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[genre]"
+                      lineageId="Package\Movie_Genres Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[genre]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Movie_Genres Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[genreMovieID]"
+                      dataType="i4"
+                      name="genreMovieID" />
+                    <externalMetadataColumn
+                      refId="Package\Movie_Genres Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[genre]"
+                      dataType="wstr"
+                      length="50"
+                      name="genre" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Movie_Genres Data to Staging\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Movie_Genres Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Movie_Genres Data to Staging\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Movie_Genres Data to Staging\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Movie_Genres Data to Staging\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Movie_Genres Data to Staging\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Movie_Genres Data to Staging\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[movie_genres]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Movie_Genres Data to Staging\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LAPTOP-B183G8T7.HetRecMovies_SourceDB]"
+                  connectionManagerRefId="Package.ConnectionManagers[LAPTOP-B183G8T7.HetRecMovies_SourceDB]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Movie_Genres Data to Staging\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Movie_Genres Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[genreMovieID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Movie_Genres Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[genreMovieID]"
+                      lineageId="Package\Movie_Genres Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[genreMovieID]"
+                      name="genreMovieID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Movie_Genres Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[genre]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Movie_Genres Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[genre]"
+                      length="50"
+                      lineageId="Package\Movie_Genres Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[genre]"
+                      name="genre"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Movie_Genres Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[genreMovieID]"
+                      dataType="i4"
+                      name="genreMovieID" />
+                    <externalMetadataColumn
+                      refId="Package\Movie_Genres Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[genre]"
+                      dataType="wstr"
+                      length="50"
+                      name="genre" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Movie_Genres Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Movie_Genres Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[genreMovieID]"
+                      dataType="i4"
+                      lineageId="Package\Movie_Genres Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[genreMovieID]"
+                      name="genreMovieID" />
+                    <outputColumn
+                      refId="Package\Movie_Genres Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[genre]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Movie_Genres Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[genre]"
+                      name="genre" />
+                    <outputColumn
+                      refId="Package\Movie_Genres Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Movie_Genres Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Movie_Genres Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Movie_Genres Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Movie_Genres Data to Staging.Paths[OLE DB Source Output]"
+              endId="Package\Movie_Genres Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Movie_Genres Data to Staging\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Movie_Locations Data to Staging"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{35B3E2BC-9B54-472B-9EC9-6C01D119CB57}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Movie_Locations Data to Staging"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:EventHandlers>
+        <DTS:EventHandler
+          DTS:refId="Package\Movie_Locations Data to Staging.EventHandlers[OnPreExecute]"
+          DTS:CreationName="OnPreExecute"
+          DTS:DTSID="{248C575C-15B7-4B93-ACD6-EEBE526A88D4}"
+          DTS:EventID="516"
+          DTS:EventName="OnPreExecute"
+          DTS:LocaleID="-1">
+          <DTS:Variables>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:Description="The propagate property of the event"
+              DTS:DTSID="{CA8A1FE9-04EF-4BAC-AE25-687803B16953}"
+              DTS:IncludeInDebugDump="6789"
+              DTS:Namespace="System"
+              DTS:ObjectName="Propagate">
+              <DTS:VariableValue
+                DTS:DataType="11">-1</DTS:VariableValue>
+            </DTS:Variable>
+          </DTS:Variables>
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Movie_Locations Data to Staging.EventHandlers[OnPreExecute]\trucate STG movieLocations"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{DA783E61-2FD0-40F4-A58C-2BAAF1BDAC23}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="trucate STG movieLocations"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{6B106B29-857B-4857-A2B9-6C4A328DE549}"
+                  SQLTask:SqlStatementSource="truncate table [HetRecMovies_Staging].[dbo].[MovieLocations_Staging]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+        </DTS:EventHandler>
+      </DTS:EventHandlers>
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Movie_Locations Data to Staging\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[MovieLocations_Staging]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Movie_Locations Data to Staging\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LAPTOP-B183G8T7.HetRecMovies_Staging]"
+                  connectionManagerRefId="Package.ConnectionManagers[LAPTOP-B183G8T7.HetRecMovies_Staging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Movie_Locations Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Movie_Locations Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[movieID]"
+                      cachedDataType="i4"
+                      cachedName="movieID"
+                      externalMetadataColumnId="Package\Movie_Locations Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[movieID]"
+                      lineageId="Package\Movie_Locations Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[movieID]" />
+                    <inputColumn
+                      refId="Package\Movie_Locations Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[country]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="country"
+                      externalMetadataColumnId="Package\Movie_Locations Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[country]"
+                      lineageId="Package\Movie_Locations Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[country]" />
+                    <inputColumn
+                      refId="Package\Movie_Locations Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[state]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="state"
+                      externalMetadataColumnId="Package\Movie_Locations Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[state]"
+                      lineageId="Package\Movie_Locations Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[state]" />
+                    <inputColumn
+                      refId="Package\Movie_Locations Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[location]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="location"
+                      externalMetadataColumnId="Package\Movie_Locations Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[location]"
+                      lineageId="Package\Movie_Locations Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[location]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Movie_Locations Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[movieID]"
+                      dataType="i4"
+                      name="movieID" />
+                    <externalMetadataColumn
+                      refId="Package\Movie_Locations Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[country]"
+                      dataType="wstr"
+                      length="50"
+                      name="country" />
+                    <externalMetadataColumn
+                      refId="Package\Movie_Locations Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[state]"
+                      dataType="wstr"
+                      length="50"
+                      name="state" />
+                    <externalMetadataColumn
+                      refId="Package\Movie_Locations Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[location]"
+                      dataType="wstr"
+                      length="100"
+                      name="location" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Movie_Locations Data to Staging\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Movie_Locations Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Movie_Locations Data to Staging\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Movie_Locations Data to Staging\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Movie_Locations Data to Staging\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Movie_Locations Data to Staging\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Movie_Locations Data to Staging\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[movie_locations]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Movie_Locations Data to Staging\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LAPTOP-B183G8T7.HetRecMovies_SourceDB]"
+                  connectionManagerRefId="Package.ConnectionManagers[LAPTOP-B183G8T7.HetRecMovies_SourceDB]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Movie_Locations Data to Staging\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Movie_Locations Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[movieID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Movie_Locations Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[movieID]"
+                      lineageId="Package\Movie_Locations Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[movieID]"
+                      name="movieID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Movie_Locations Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[country]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Movie_Locations Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[country]"
+                      length="50"
+                      lineageId="Package\Movie_Locations Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[country]"
+                      name="country"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Movie_Locations Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[state]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Movie_Locations Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[state]"
+                      length="50"
+                      lineageId="Package\Movie_Locations Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[state]"
+                      name="state"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Movie_Locations Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[location]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Movie_Locations Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[location]"
+                      length="100"
+                      lineageId="Package\Movie_Locations Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[location]"
+                      name="location"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Movie_Locations Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[movieID]"
+                      dataType="i4"
+                      name="movieID" />
+                    <externalMetadataColumn
+                      refId="Package\Movie_Locations Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[country]"
+                      dataType="wstr"
+                      length="50"
+                      name="country" />
+                    <externalMetadataColumn
+                      refId="Package\Movie_Locations Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[state]"
+                      dataType="wstr"
+                      length="50"
+                      name="state" />
+                    <externalMetadataColumn
+                      refId="Package\Movie_Locations Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[location]"
+                      dataType="wstr"
+                      length="100"
+                      name="location" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Movie_Locations Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Movie_Locations Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[movieID]"
+                      dataType="i4"
+                      lineageId="Package\Movie_Locations Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[movieID]"
+                      name="movieID" />
+                    <outputColumn
+                      refId="Package\Movie_Locations Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[country]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Movie_Locations Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[country]"
+                      name="country" />
+                    <outputColumn
+                      refId="Package\Movie_Locations Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[state]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Movie_Locations Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[state]"
+                      name="state" />
+                    <outputColumn
+                      refId="Package\Movie_Locations Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[location]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Movie_Locations Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[location]"
+                      name="location" />
+                    <outputColumn
+                      refId="Package\Movie_Locations Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Movie_Locations Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Movie_Locations Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Movie_Locations Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Movie_Locations Data to Staging.Paths[OLE DB Source Output]"
+              endId="Package\Movie_Locations Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Movie_Locations Data to Staging\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\RottenTomatoes Data to Staging"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{A2681911-411A-4D3C-AC8D-FF2951484FDC}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="RottenTomatoes Data to Staging"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:EventHandlers>
+        <DTS:EventHandler
+          DTS:refId="Package\RottenTomatoes Data to Staging.EventHandlers[OnPreExecute]"
+          DTS:CreationName="OnPreExecute"
+          DTS:DTSID="{1AAD41B3-526E-4685-B58E-768E94A4B6A9}"
+          DTS:EventID="-649129823"
+          DTS:EventName="OnPreExecute"
+          DTS:LocaleID="-1">
+          <DTS:Variables>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:Description="The propagate property of the event"
+              DTS:DTSID="{07D6A035-F734-452B-B091-7F8EAE7DC3EB}"
+              DTS:IncludeInDebugDump="6789"
+              DTS:Namespace="System"
+              DTS:ObjectName="Propagate">
+              <DTS:VariableValue
+                DTS:DataType="11">-1</DTS:VariableValue>
+            </DTS:Variable>
+          </DTS:Variables>
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\RottenTomatoes Data to Staging.EventHandlers[OnPreExecute]\truncate STG RottenTomatoes"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{909CE27C-0F60-47C3-A1C8-5718E937326F}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="truncate STG RottenTomatoes"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{6B106B29-857B-4857-A2B9-6C4A328DE549}"
+                  SQLTask:SqlStatementSource="truncate table [HetRecMovies_Staging].[dbo].[RottenTomatoesRatings_Staging]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+        </DTS:EventHandler>
+      </DTS:EventHandlers>
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\RottenTomatoes Data to Staging\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[RottenTomatoesRatings_Staging]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\RottenTomatoes Data to Staging\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LAPTOP-B183G8T7.HetRecMovies_Staging]"
+                  connectionManagerRefId="Package.ConnectionManagers[LAPTOP-B183G8T7.HetRecMovies_Staging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\RottenTomatoes Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\RottenTomatoes Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[rottenTomatoesID]"
+                      cachedDataType="i4"
+                      cachedName="rottenTomatoesID"
+                      externalMetadataColumnId="Package\RottenTomatoes Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[rottenTomatoesID]"
+                      lineageId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[rottenTomatoesID]" />
+                    <inputColumn
+                      refId="Package\RottenTomatoes Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[movieTitle]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="movieTitle"
+                      externalMetadataColumnId="Package\RottenTomatoes Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[movieTitle]"
+                      lineageId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[movieTitle]" />
+                    <inputColumn
+                      refId="Package\RottenTomatoes Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[rtAllCriticsRating]"
+                      cachedDataType="numeric"
+                      cachedName="rtAllCriticsRating"
+                      cachedPrecision="18"
+                      cachedScale="1"
+                      externalMetadataColumnId="Package\RottenTomatoes Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[rtAllCriticsRating]"
+                      lineageId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[rtAllCriticsRating]" />
+                    <inputColumn
+                      refId="Package\RottenTomatoes Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[rtAllCriticsNumReviews]"
+                      cachedDataType="i4"
+                      cachedName="rtAllCriticsNumReviews"
+                      externalMetadataColumnId="Package\RottenTomatoes Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[rtAllCriticsNumReviews]"
+                      lineageId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[rtAllCriticsNumReviews]" />
+                    <inputColumn
+                      refId="Package\RottenTomatoes Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[rtTopCriticsRating]"
+                      cachedDataType="numeric"
+                      cachedName="rtTopCriticsRating"
+                      cachedPrecision="18"
+                      cachedScale="1"
+                      externalMetadataColumnId="Package\RottenTomatoes Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[rtTopCriticsRating]"
+                      lineageId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[rtTopCriticsRating]" />
+                    <inputColumn
+                      refId="Package\RottenTomatoes Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[rtTopCriticsNumReviews]"
+                      cachedDataType="i4"
+                      cachedName="rtTopCriticsNumReviews"
+                      externalMetadataColumnId="Package\RottenTomatoes Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[rtTopCriticsNumReviews]"
+                      lineageId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[rtTopCriticsNumReviews]" />
+                    <inputColumn
+                      refId="Package\RottenTomatoes Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[rtAudienceRating]"
+                      cachedDataType="numeric"
+                      cachedName="rtAudienceRating"
+                      cachedPrecision="18"
+                      cachedScale="1"
+                      externalMetadataColumnId="Package\RottenTomatoes Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[rtAudienceRating]"
+                      lineageId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[rtAudienceRating]" />
+                    <inputColumn
+                      refId="Package\RottenTomatoes Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[rtAudienceNumRatings]"
+                      cachedDataType="i4"
+                      cachedName="rtAudienceNumRatings"
+                      externalMetadataColumnId="Package\RottenTomatoes Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[rtAudienceNumRatings]"
+                      lineageId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[rtAudienceNumRatings]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\RottenTomatoes Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[rottenTomatoesID]"
+                      dataType="i4"
+                      name="rottenTomatoesID" />
+                    <externalMetadataColumn
+                      refId="Package\RottenTomatoes Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[movieTitle]"
+                      dataType="wstr"
+                      length="100"
+                      name="movieTitle" />
+                    <externalMetadataColumn
+                      refId="Package\RottenTomatoes Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[rtAllCriticsRating]"
+                      dataType="numeric"
+                      name="rtAllCriticsRating"
+                      precision="18"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\RottenTomatoes Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[rtAllCriticsNumReviews]"
+                      dataType="i4"
+                      name="rtAllCriticsNumReviews" />
+                    <externalMetadataColumn
+                      refId="Package\RottenTomatoes Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[rtTopCriticsRating]"
+                      dataType="numeric"
+                      name="rtTopCriticsRating"
+                      precision="18"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\RottenTomatoes Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[rtTopCriticsNumReviews]"
+                      dataType="i4"
+                      name="rtTopCriticsNumReviews" />
+                    <externalMetadataColumn
+                      refId="Package\RottenTomatoes Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[rtAudienceRating]"
+                      dataType="numeric"
+                      name="rtAudienceRating"
+                      precision="18"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\RottenTomatoes Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[rtAudienceNumRatings]"
+                      dataType="i4"
+                      name="rtAudienceNumRatings" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\RottenTomatoes Data to Staging\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\RottenTomatoes Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\RottenTomatoes Data to Staging\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\RottenTomatoes Data to Staging\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\RottenTomatoes Data to Staging\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\RottenTomatoes Data to Staging\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\RottenTomatoes Data to Staging\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[rotten_tomatoes]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\RottenTomatoes Data to Staging\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LAPTOP-B183G8T7.HetRecMovies_SourceDB]"
+                  connectionManagerRefId="Package.ConnectionManagers[LAPTOP-B183G8T7.HetRecMovies_SourceDB]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[rottenTomatoesID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[rottenTomatoesID]"
+                      lineageId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[rottenTomatoesID]"
+                      name="rottenTomatoesID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[movieTitle]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[movieTitle]"
+                      length="100"
+                      lineageId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[movieTitle]"
+                      name="movieTitle"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[rtAllCriticsRating]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[rtAllCriticsRating]"
+                      lineageId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[rtAllCriticsRating]"
+                      name="rtAllCriticsRating"
+                      precision="18"
+                      scale="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[rtAllCriticsNumReviews]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[rtAllCriticsNumReviews]"
+                      lineageId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[rtAllCriticsNumReviews]"
+                      name="rtAllCriticsNumReviews"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[rtTopCriticsRating]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[rtTopCriticsRating]"
+                      lineageId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[rtTopCriticsRating]"
+                      name="rtTopCriticsRating"
+                      precision="18"
+                      scale="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[rtTopCriticsNumReviews]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[rtTopCriticsNumReviews]"
+                      lineageId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[rtTopCriticsNumReviews]"
+                      name="rtTopCriticsNumReviews"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[rtAudienceRating]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[rtAudienceRating]"
+                      lineageId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[rtAudienceRating]"
+                      name="rtAudienceRating"
+                      precision="18"
+                      scale="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[rtAudienceNumRatings]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[rtAudienceNumRatings]"
+                      lineageId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[rtAudienceNumRatings]"
+                      name="rtAudienceNumRatings"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[rottenTomatoesID]"
+                      dataType="i4"
+                      name="rottenTomatoesID" />
+                    <externalMetadataColumn
+                      refId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[movieTitle]"
+                      dataType="wstr"
+                      length="100"
+                      name="movieTitle" />
+                    <externalMetadataColumn
+                      refId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[rtAllCriticsRating]"
+                      dataType="numeric"
+                      name="rtAllCriticsRating"
+                      precision="18"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[rtAllCriticsNumReviews]"
+                      dataType="i4"
+                      name="rtAllCriticsNumReviews" />
+                    <externalMetadataColumn
+                      refId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[rtTopCriticsRating]"
+                      dataType="numeric"
+                      name="rtTopCriticsRating"
+                      precision="18"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[rtTopCriticsNumReviews]"
+                      dataType="i4"
+                      name="rtTopCriticsNumReviews" />
+                    <externalMetadataColumn
+                      refId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[rtAudienceRating]"
+                      dataType="numeric"
+                      name="rtAudienceRating"
+                      precision="18"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[rtAudienceNumRatings]"
+                      dataType="i4"
+                      name="rtAudienceNumRatings" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[rottenTomatoesID]"
+                      dataType="i4"
+                      lineageId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[rottenTomatoesID]"
+                      name="rottenTomatoesID" />
+                    <outputColumn
+                      refId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[movieTitle]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[movieTitle]"
+                      name="movieTitle" />
+                    <outputColumn
+                      refId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[rtAllCriticsRating]"
+                      dataType="numeric"
+                      lineageId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[rtAllCriticsRating]"
+                      name="rtAllCriticsRating"
+                      precision="18"
+                      scale="1" />
+                    <outputColumn
+                      refId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[rtAllCriticsNumReviews]"
+                      dataType="i4"
+                      lineageId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[rtAllCriticsNumReviews]"
+                      name="rtAllCriticsNumReviews" />
+                    <outputColumn
+                      refId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[rtTopCriticsRating]"
+                      dataType="numeric"
+                      lineageId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[rtTopCriticsRating]"
+                      name="rtTopCriticsRating"
+                      precision="18"
+                      scale="1" />
+                    <outputColumn
+                      refId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[rtTopCriticsNumReviews]"
+                      dataType="i4"
+                      lineageId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[rtTopCriticsNumReviews]"
+                      name="rtTopCriticsNumReviews" />
+                    <outputColumn
+                      refId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[rtAudienceRating]"
+                      dataType="numeric"
+                      lineageId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[rtAudienceRating]"
+                      name="rtAudienceRating"
+                      precision="18"
+                      scale="1" />
+                    <outputColumn
+                      refId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[rtAudienceNumRatings]"
+                      dataType="i4"
+                      lineageId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[rtAudienceNumRatings]"
+                      name="rtAudienceNumRatings" />
+                    <outputColumn
+                      refId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\RottenTomatoes Data to Staging.Paths[OLE DB Source Output]"
+              endId="Package\RottenTomatoes Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\RottenTomatoes Data to Staging\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\UserRatedMovies Data to Staging"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{3177DC04-2710-46A4-9201-50E0B82FDC5A}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="UserRatedMovies Data to Staging"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:EventHandlers>
+        <DTS:EventHandler
+          DTS:refId="Package\UserRatedMovies Data to Staging.EventHandlers[OnPreExecute]"
+          DTS:CreationName="OnPreExecute"
+          DTS:DTSID="{B83028D8-5292-4328-9FD2-47DF3E979F27}"
+          DTS:EventID="16384"
+          DTS:EventName="OnPreExecute"
+          DTS:LocaleID="-1">
+          <DTS:Variables>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:Description="The propagate property of the event"
+              DTS:DTSID="{A69C82E1-22AB-4669-A3DD-22DEE6B4E3FE}"
+              DTS:IncludeInDebugDump="6789"
+              DTS:Namespace="System"
+              DTS:ObjectName="Propagate">
+              <DTS:VariableValue
+                DTS:DataType="11">-1</DTS:VariableValue>
+            </DTS:Variable>
+          </DTS:Variables>
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\UserRatedMovies Data to Staging.EventHandlers[OnPreExecute]\truncate STG UserRatedMovies"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{F4AA318D-EF48-46B9-9045-36F2116D5F38}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="truncate STG UserRatedMovies"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{6B106B29-857B-4857-A2B9-6C4A328DE549}"
+                  SQLTask:SqlStatementSource="truncate table [HetRecMovies_Staging].[dbo].[UserRatedMovies_Staging]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+        </DTS:EventHandler>
+      </DTS:EventHandlers>
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\UserRatedMovies Data to Staging\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[UserRatedMovies_Staging]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\UserRatedMovies Data to Staging\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LAPTOP-B183G8T7.HetRecMovies_Staging]"
+                  connectionManagerRefId="Package.ConnectionManagers[LAPTOP-B183G8T7.HetRecMovies_Staging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\UserRatedMovies Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\UserRatedMovies Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[userID]"
+                      cachedDataType="i4"
+                      cachedName="userID"
+                      externalMetadataColumnId="Package\UserRatedMovies Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[userID]"
+                      lineageId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[userID]" />
+                    <inputColumn
+                      refId="Package\UserRatedMovies Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[movieID]"
+                      cachedDataType="i4"
+                      cachedName="movieID"
+                      externalMetadataColumnId="Package\UserRatedMovies Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[movieID]"
+                      lineageId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[movieID]" />
+                    <inputColumn
+                      refId="Package\UserRatedMovies Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[rating]"
+                      cachedDataType="numeric"
+                      cachedName="rating"
+                      cachedPrecision="18"
+                      cachedScale="1"
+                      externalMetadataColumnId="Package\UserRatedMovies Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[rating]"
+                      lineageId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[rating]" />
+                    <inputColumn
+                      refId="Package\UserRatedMovies Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[year]"
+                      cachedDataType="i4"
+                      cachedName="year"
+                      externalMetadataColumnId="Package\UserRatedMovies Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[year]"
+                      lineageId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[year]" />
+                    <inputColumn
+                      refId="Package\UserRatedMovies Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[month]"
+                      cachedDataType="i4"
+                      cachedName="month"
+                      externalMetadataColumnId="Package\UserRatedMovies Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[month]"
+                      lineageId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[month]" />
+                    <inputColumn
+                      refId="Package\UserRatedMovies Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[day]"
+                      cachedDataType="i4"
+                      cachedName="day"
+                      externalMetadataColumnId="Package\UserRatedMovies Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[day]"
+                      lineageId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[day]" />
+                    <inputColumn
+                      refId="Package\UserRatedMovies Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Date"
+                      externalMetadataColumnId="Package\UserRatedMovies Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Date]"
+                      lineageId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[Date]" />
+                    <inputColumn
+                      refId="Package\UserRatedMovies Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[actorID]"
+                      cachedDataType="i4"
+                      cachedName="actorID"
+                      externalMetadataColumnId="Package\UserRatedMovies Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[actorID]"
+                      lineageId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[actorID]" />
+                    <inputColumn
+                      refId="Package\UserRatedMovies Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[genreMovieID]"
+                      cachedDataType="i4"
+                      cachedName="genreMovieID"
+                      externalMetadataColumnId="Package\UserRatedMovies Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[genreMovieID]"
+                      lineageId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[genreMovieID]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\UserRatedMovies Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[userID]"
+                      dataType="i4"
+                      name="userID" />
+                    <externalMetadataColumn
+                      refId="Package\UserRatedMovies Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[movieID]"
+                      dataType="i4"
+                      name="movieID" />
+                    <externalMetadataColumn
+                      refId="Package\UserRatedMovies Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[rating]"
+                      dataType="numeric"
+                      name="rating"
+                      precision="18"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\UserRatedMovies Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[year]"
+                      dataType="i4"
+                      name="year" />
+                    <externalMetadataColumn
+                      refId="Package\UserRatedMovies Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[month]"
+                      dataType="i4"
+                      name="month" />
+                    <externalMetadataColumn
+                      refId="Package\UserRatedMovies Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[day]"
+                      dataType="i4"
+                      name="day" />
+                    <externalMetadataColumn
+                      refId="Package\UserRatedMovies Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Date]"
+                      dataType="dbTimeStamp"
+                      name="Date" />
+                    <externalMetadataColumn
+                      refId="Package\UserRatedMovies Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[actorID]"
+                      dataType="i4"
+                      name="actorID" />
+                    <externalMetadataColumn
+                      refId="Package\UserRatedMovies Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[genreMovieID]"
+                      dataType="i4"
+                      name="genreMovieID" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\UserRatedMovies Data to Staging\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\UserRatedMovies Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\UserRatedMovies Data to Staging\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\UserRatedMovies Data to Staging\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\UserRatedMovies Data to Staging\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\UserRatedMovies Data to Staging\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\UserRatedMovies Data to Staging\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[user_rated_movies]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\UserRatedMovies Data to Staging\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LAPTOP-B183G8T7.HetRecMovies_SourceDB]"
+                  connectionManagerRefId="Package.ConnectionManagers[LAPTOP-B183G8T7.HetRecMovies_SourceDB]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[userID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[userID]"
+                      lineageId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[userID]"
+                      name="userID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[movieID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[movieID]"
+                      lineageId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[movieID]"
+                      name="movieID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[rating]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[rating]"
+                      lineageId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[rating]"
+                      name="rating"
+                      precision="18"
+                      scale="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[year]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[year]"
+                      lineageId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[year]"
+                      name="year"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[month]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[month]"
+                      lineageId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[month]"
+                      name="month"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[day]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[day]"
+                      lineageId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[day]"
+                      name="day"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[Date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Date]"
+                      lineageId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[Date]"
+                      name="Date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[actorID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[actorID]"
+                      lineageId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[actorID]"
+                      name="actorID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[genreMovieID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[genreMovieID]"
+                      lineageId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].Columns[genreMovieID]"
+                      name="genreMovieID"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[userID]"
+                      dataType="i4"
+                      name="userID" />
+                    <externalMetadataColumn
+                      refId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[movieID]"
+                      dataType="i4"
+                      name="movieID" />
+                    <externalMetadataColumn
+                      refId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[rating]"
+                      dataType="numeric"
+                      name="rating"
+                      precision="18"
+                      scale="1" />
+                    <externalMetadataColumn
+                      refId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[year]"
+                      dataType="i4"
+                      name="year" />
+                    <externalMetadataColumn
+                      refId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[month]"
+                      dataType="i4"
+                      name="month" />
+                    <externalMetadataColumn
+                      refId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[day]"
+                      dataType="i4"
+                      name="day" />
+                    <externalMetadataColumn
+                      refId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Date]"
+                      dataType="dbTimeStamp"
+                      name="Date" />
+                    <externalMetadataColumn
+                      refId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[actorID]"
+                      dataType="i4"
+                      name="actorID" />
+                    <externalMetadataColumn
+                      refId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[genreMovieID]"
+                      dataType="i4"
+                      name="genreMovieID" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[userID]"
+                      dataType="i4"
+                      lineageId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[userID]"
+                      name="userID" />
+                    <outputColumn
+                      refId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[movieID]"
+                      dataType="i4"
+                      lineageId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[movieID]"
+                      name="movieID" />
+                    <outputColumn
+                      refId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[rating]"
+                      dataType="numeric"
+                      lineageId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[rating]"
+                      name="rating"
+                      precision="18"
+                      scale="1" />
+                    <outputColumn
+                      refId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[year]"
+                      dataType="i4"
+                      lineageId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[year]"
+                      name="year" />
+                    <outputColumn
+                      refId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[month]"
+                      dataType="i4"
+                      lineageId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[month]"
+                      name="month" />
+                    <outputColumn
+                      refId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[day]"
+                      dataType="i4"
+                      lineageId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[day]"
+                      name="day" />
+                    <outputColumn
+                      refId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Date]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Date]"
+                      name="Date" />
+                    <outputColumn
+                      refId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[actorID]"
+                      dataType="i4"
+                      lineageId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[actorID]"
+                      name="actorID" />
+                    <outputColumn
+                      refId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[genreMovieID]"
+                      dataType="i4"
+                      lineageId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[genreMovieID]"
+                      name="genreMovieID" />
+                    <outputColumn
+                      refId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\UserRatedMovies Data to Staging.Paths[OLE DB Source Output]"
+              endId="Package\UserRatedMovies Data to Staging\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\UserRatedMovies Data to Staging\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{B88C7E14-D554-4883-8E65-E97BE11E6491}"
+      DTS:From="Package\Movie_Actors Data to Staging"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Movie_Locations Data to Staging" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{7B9ACD92-7109-4CEF-B083-8DEF1A6D2DB2}"
+      DTS:From="Package\Movie_Genres Data to Staging"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\RottenTomatoes Data to Staging" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{82523880-ADFF-4566-96B0-7FEAD817EBC3}"
+      DTS:From="Package\Movie_Locations Data to Staging"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Movie_Genres Data to Staging" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{6EF208EC-C4C4-48CA-A8D8-FEF07057056D}"
+      DTS:From="Package\RottenTomatoes Data to Staging"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\UserRatedMovies Data to Staging" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{9CF03595-6161-4AC5-82B2-58665FB1AA2F}"
+      DTS:From="Package\UserRatedMovies Data to Staging"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Movies Data to Staging" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="247.2,41.6"
+          Id="Package\Movie_Actors Data to Staging"
+          TopLeft="207.142860670479,7.64705893077656" />
+        <NodeLayout
+          Size="251.2,41.6"
+          Id="Package\Movie_Genres Data to Staging"
+          TopLeft="205.714289217579,187.352943804024" />
+        <NodeLayout
+          Size="245.6,41.6"
+          Id="Package\Movie_Locations Data to Staging"
+          TopLeft="207.142860670479,94.0588248485513" />
+        <NodeLayout
+          Size="251.2,41.6"
+          Id="Package\Movies Data to Staging"
+          TopLeft="208.265309669186,411.521014174787" />
+        <NodeLayout
+          Size="251.2,41.6"
+          Id="Package\RottenTomatoes Data to Staging"
+          TopLeft="205.00000349113,266.117650791023" />
+        <NodeLayout
+          Size="236,41.6"
+          Id="Package\UserRatedMovies Data to Staging"
+          TopLeft="210.000003576279,335.576475092613" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="330.342860670479,49.2470589307766">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,44.8117659177747"
+              Start="0,0"
+              End="0,37.3117659177747">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.3117659177747" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="330.957146354354,228.952943804024">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37.164706986999"
+              Start="0,0"
+              End="0,29.664706986999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.664706986999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="330.628574944029,135.658824848551">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,51.6941189554727"
+              Start="0,0"
+              End="0,44.1941189554727">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,44.1941189554727" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="329.300003533705,307.717650791023">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,27.85882430159"
+              Start="0,0"
+              End="0,20.35882430159">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.35882430159" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="330.932656622733,377.176475092613">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,34.344539082174"
+              Start="0,0"
+              End="0,26.844539082174">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.844539082174" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Movie_Actors Data to Staging">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="164.8,41.6"
+          Id="Package\Movie_Actors Data to Staging\OLE DB Source"
+          TopLeft="87.8571443533411,74.1764716285323" />
+        <NodeLayout
+          Size="170.4,41.6"
+          Id="Package\Movie_Actors Data to Staging\OLE DB Destination"
+          TopLeft="227.142861011077,213.352944168665" />
+        <EdgeLayout
+          Id="Package\Movie_Actors Data to Staging.Paths[OLE DB Source Output]"
+          TopLeft="170.257144353341,115.776471628532">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="142.085716657736,97.5764725401328"
+              Start="0,0"
+              End="142.085716657736,90.0764725401328">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,44.7882362700664" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,44.7882362700664"
+                    Point2="0,48.7882362700664"
+                    Point3="4,48.7882362700664" />
+                  <mssgle:LineSegment
+                    End="138.085716657736,48.7882362700664" />
+                  <mssgle:CubicBezierSegment
+                    Point1="138.085716657736,48.7882362700664"
+                    Point2="142.085716657736,48.7882362700664"
+                    Point3="142.085716657736,52.7882362700664" />
+                  <mssgle:LineSegment
+                    End="142.085716657736,90.0764725401328" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <DtsEventHandler
+    design-time-name="Package\Movie_Actors Data to Staging.EventHandlers[OnPreExecute]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="200,41.6"
+          Id="Package\Movie_Actors Data to Staging.EventHandlers[OnPreExecute]\truncate STG MovieActors"
+          TopLeft="311,108" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <PipelineComponentMetadata
+    design-time-name="Package\Movie_Actors Data to Staging\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Movie_Actors Data to Staging\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Movie_Genres Data to Staging">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="149.6,41.6"
+          Id="Package\Movie_Genres Data to Staging\OLE DB Source"
+          TopLeft="129,98" />
+        <NodeLayout
+          Size="170.4,41.6"
+          Id="Package\Movie_Genres Data to Staging\OLE DB Destination"
+          TopLeft="354,236" />
+        <EdgeLayout
+          Id="Package\Movie_Genres Data to Staging.Paths[OLE DB Source Output]"
+          TopLeft="203.8,139.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="235.4,96.4"
+              Start="0,0"
+              End="235.4,88.9">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,44.2" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,44.2"
+                    Point2="0,48.2"
+                    Point3="4,48.2" />
+                  <mssgle:LineSegment
+                    End="231.4,48.2" />
+                  <mssgle:CubicBezierSegment
+                    Point1="231.4,48.2"
+                    Point2="235.4,48.2"
+                    Point3="235.4,52.2" />
+                  <mssgle:LineSegment
+                    End="235.4,88.9" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <DtsEventHandler
+    design-time-name="Package\Movie_Genres Data to Staging.EventHandlers[OnPreExecute]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="306.4,41.6"
+          Id="Package\Movie_Genres Data to Staging.EventHandlers[OnPreExecute]\truncate STG movieGenres"
+          TopLeft="253,58" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <PipelineComponentMetadata
+    design-time-name="Package\Movie_Genres Data to Staging\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Movie_Genres Data to Staging\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Movie_Locations Data to Staging">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="149.6,41.6"
+          Id="Package\Movie_Locations Data to Staging\OLE DB Source"
+          TopLeft="128,55" />
+        <NodeLayout
+          Size="170.4,41.6"
+          Id="Package\Movie_Locations Data to Staging\OLE DB Destination"
+          TopLeft="281,190" />
+        <EdgeLayout
+          Id="Package\Movie_Locations Data to Staging.Paths[OLE DB Source Output]"
+          TopLeft="202.8,96.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="163.4,93.4"
+              Start="0,0"
+              End="163.4,85.9">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,42.7" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,42.7"
+                    Point2="0,46.7"
+                    Point3="4,46.7" />
+                  <mssgle:LineSegment
+                    End="159.4,46.7" />
+                  <mssgle:CubicBezierSegment
+                    Point1="159.4,46.7"
+                    Point2="163.4,46.7"
+                    Point3="163.4,50.7" />
+                  <mssgle:LineSegment
+                    End="163.4,85.9" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <DtsEventHandler
+    design-time-name="Package\Movie_Locations Data to Staging.EventHandlers[OnPreExecute]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="209.6,41.6"
+          Id="Package\Movie_Locations Data to Staging.EventHandlers[OnPreExecute]\trucate STG movieLocations"
+          TopLeft="381,91" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <PipelineComponentMetadata
+    design-time-name="Package\Movie_Locations Data to Staging\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Movie_Locations Data to Staging\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Movies Data to Staging">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="170.4,41.6"
+          Id="Package\Movies Data to Staging\OLE DB Destination"
+          TopLeft="263,169" />
+        <NodeLayout
+          Size="150.4,41.6"
+          Id="Package\Movies Data to Staging\Flat File Source"
+          TopLeft="140,57" />
+        <EdgeLayout
+          Id="Package\Movies Data to Staging.Paths[Flat File Source Output]"
+          TopLeft="215.2,98.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="133,70.4000000000001"
+              Start="0,0"
+              End="133,62.9000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.2000000000001" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31.2000000000001"
+                    Point2="0,35.2000000000001"
+                    Point3="4,35.2000000000001" />
+                  <mssgle:LineSegment
+                    End="129,35.2000000000001" />
+                  <mssgle:CubicBezierSegment
+                    Point1="129,35.2000000000001"
+                    Point2="133,35.2000000000001"
+                    Point3="133,39.2000000000001" />
+                  <mssgle:LineSegment
+                    End="133,62.9000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <DtsEventHandler
+    design-time-name="Package\Movies Data to Staging.EventHandlers[OnPreExecute]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="233.6,41.6"
+          Id="Package\Movies Data to Staging.EventHandlers[OnPreExecute]\truncate STG Movies"
+          TopLeft="388,91" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <PipelineComponentMetadata
+    design-time-name="Package\Movies Data to Staging\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\RottenTomatoes Data to Staging">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="170.4,54.4"
+          Id="Package\RottenTomatoes Data to Staging\OLE DB Destination"
+          TopLeft="281,179" />
+        <NodeLayout
+          Size="179.2,48.8"
+          Id="Package\RottenTomatoes Data to Staging\OLE DB Source"
+          TopLeft="109,65" />
+        <EdgeLayout
+          Id="Package\RottenTomatoes Data to Staging.Paths[OLE DB Source Output]"
+          TopLeft="198.6,113.8">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="167.6,65.2"
+              Start="0,0"
+              End="167.6,57.7">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.6" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,28.6"
+                    Point2="0,32.6"
+                    Point3="4,32.6" />
+                  <mssgle:LineSegment
+                    End="163.6,32.6" />
+                  <mssgle:CubicBezierSegment
+                    Point1="163.6,32.6"
+                    Point2="167.6,32.6"
+                    Point3="167.6,36.6" />
+                  <mssgle:LineSegment
+                    End="167.6,57.7" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <DtsEventHandler
+    design-time-name="Package\RottenTomatoes Data to Staging.EventHandlers[OnPreExecute]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="220.8,41.6"
+          Id="Package\RottenTomatoes Data to Staging.EventHandlers[OnPreExecute]\truncate STG RottenTomatoes"
+          TopLeft="320,90" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <PipelineComponentMetadata
+    design-time-name="Package\RottenTomatoes Data to Staging\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\RottenTomatoes Data to Staging\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\UserRatedMovies Data to Staging">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="149.6,41.6"
+          Id="Package\UserRatedMovies Data to Staging\OLE DB Source"
+          TopLeft="97.8571445236401,78.7647069869982" />
+        <NodeLayout
+          Size="170.4,41.6"
+          Id="Package\UserRatedMovies Data to Staging\OLE DB Destination"
+          TopLeft="250.714289983925,193.470590948646" />
+        <EdgeLayout
+          Id="Package\UserRatedMovies Data to Staging.Paths[OLE DB Source Output]"
+          TopLeft="172.65714452364,120.364706986998">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="163.257145460285,73.1058839616479"
+              Start="0,0"
+              End="163.257145460285,65.6058839616479">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.552941980824" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,32.552941980824"
+                    Point2="0,36.552941980824"
+                    Point3="4,36.552941980824" />
+                  <mssgle:LineSegment
+                    End="159.257145460285,36.552941980824" />
+                  <mssgle:CubicBezierSegment
+                    Point1="159.257145460285,36.552941980824"
+                    Point2="163.257145460285,36.552941980824"
+                    Point3="163.257145460285,40.552941980824" />
+                  <mssgle:LineSegment
+                    End="163.257145460285,65.6058839616479" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <DtsEventHandler
+    design-time-name="Package\UserRatedMovies Data to Staging.EventHandlers[OnPreExecute]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="224,41.6"
+          Id="Package\UserRatedMovies Data to Staging.EventHandlers[OnPreExecute]\truncate STG UserRatedMovies"
+          TopLeft="434,110" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <PipelineComponentMetadata
+    design-time-name="Package\UserRatedMovies Data to Staging\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\UserRatedMovies Data to Staging\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
